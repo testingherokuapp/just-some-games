@@ -1,493 +1,675 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <title>Mountain Game Games</title>
-
-    <link rel="shortcut icon"
-    type="image/jpg" href="mountainNoFade.png"
-    />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  .overlay{
-    opacity:0.9;
-    background-color:white;
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:0px;
-    z-index:1000;
-    display: block;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  max-width: 150px;
-  margin: 10px;
-  padding: 1px;
-  float:left;
-  height: 160px;
-}
-
-.container img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.container .btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: white;
-  color: white;
-  font-size: 16px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.container .btn:hover {
-  background-color: white;
-}
-.whiteButton {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: flex;
-}
-.whitebutton {
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor: default;
-    overflow: hidden;
-    outline:none;
-}
+<head>
+<title>Mountain Game Games</title>
+<link rel="shortcut icon" href="mountainNoFade.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
 body {
-  background-image: url('mountain.png');
-    background-repeat: no-repeat;
-      background-attachment: fixed;
-  background-size: cover;
+background-image: url(mountain.png);
+background-position: center center;
+background-repeat:no-repeat;
+background-attachment: fixed;
+background-size: cover; 
 }
 
-.is-hidden { display: none; }
-</style>
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+
+.whiteButton {
+position: absolute;
+top: 0px;
+right: 0px;
+display: flex;
+}
+	  
+.whitebutton {
+background-color: Transparent;
+background-repeat:no-repeat;
+border: none;
+cursor: default;
+overflow: hidden;
+outline:none;
+font-size:0.25em;
+}
+
+.blueContainer {
+background-color:#79ceea;
+text-align:center; 
+border-radius: 10px;
+}
+
+.f-newest {
+border-radius: 5px;
+text-align:center; 
+overflow-x: scroll;
+}
+
+.fiveGrid {
+display: grid;
+text-align:center; 
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+  
+	.text-center {
+	  text-align: center;
+	}
+  
+	.game-link {
+	  height: 200px;
+	  width: 150px;
+      margin: 5px;
+	}
+  
+	.game-tile {
+	  background-color: white;
+	  height: 200px;
+	  width: 150px;
+	  border-radius: 30px;
+	  -webkit-animation: scale-down-center 0.1s both;
+	  animation: scale-down-center 0.1s both;
+	}
+  
+	.game-tile:hover {
+	  -webkit-animation: scale-up-center 0.1s both;
+	  animation: scale-up-center 0.1s both;
+      font-weight: bold;
+      cursor: pointer;
+	}
+    
+	.game-tile:hover .game-title{
+      font-size: bold;
+      cursor: pointer;
+	}
+  
+	@-webkit-keyframes scale-up-center {
+	  0% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	  }
+  
+	  100% {
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	  }
+	}
+  
+	@-webkit-keyframes scale-down-center {
+	  0% {
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	  }
+  
+	  100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	  }
+	}
+  
+	.game-icon {
+	  border-radius: 15px;
+	  width: 150px;
+	  height: 150px;
+	}
+  
+	.game-title {
+	  font-size: 15px;
+	  text-align: center;
+	}
+  
+	.flex-container {
+	  display: flex;
+	  flex-direction: row;
+	  order: 0;
+	  flex-grow: 0;
+	  flex-wrap: wrap;
+	}
+  
+	.container {
+	  padding: 10px;
+	}
+  
+	#searchQuery {
+	  width: calc(50% + 100px);
+	  border: 3px solid #ddd;
+	  border-radius: 10px;
+      margin: 10px;
+      padding: 5px;
+	}
+  h2 {
+   width: 100%; 
+   margin: 10px 0 20px; 
+  } 
+
+  h2 span { 
+    padding:0 10px; 
+  }
+  .topcorner{
+  position:absolute;
+  top:10;
+  right:15;
+  }
+  .chat{
+background-color:skyblue;
+font-size: 16px;
+padding: 12px 24px;
+  }
+  
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #eee;
+    background: #121212;
+  }
+  body a {
+    color: #809fff;
+  }
+ .game-tile {
+	  background-color: #292929;
+  }
+  .whitebutton {
+  color: #eee;
+  }
+  .blueContainer {
+background-color:#191919;
+ }
+ .chat { 
+background-color:#383838; 
+ }
+  #searchQuery {
+color: #eee;
+background-color:#383838;  
+border: 3px solid #292929;
+  }
+    img {
+    filter: brightness(.9) contrast(1);
+  }
+}  
+  </style>
+</head>
+<body>
+  <script>
+function startSearch() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("searchQuery");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("search");
+  li = ul.getElementsByTagName("a");
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("h1")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+  </script>
+  <h1>Mountain Game Games</h1>
+    <div id="search">
+    
+  <div>
+  <section>
+   <div class="blueContainer">
+<h3><span>5 Newest Games</span></h3>
+<div id="5new" class="f-newest">
+<div id="5newHolder" class='fiveGrid'></div>
+</div>
+
+</div>
+  </section>
+</div>
+  
+  <div class="flex-container">
+	<section>
+   <div class="flex-container">
+
+  <a href="Others"class="game-link container">	
+  <div class="game-tile">	
+  <img class="game-icon" src="other.png" alt="Others" loading="lazy">
+  <h1 class="game-title">Others</h1> 	
+  </div>
+  </a>
+  
+  <a href="suggestions.html"class="game-link container">	
+  <div class="game-tile">	
+  <img class="game-icon" src="vector.gif" alt="Suggestions" loading="lazy">
+  <h1 class="game-title">Suggestions</h1> 	
+  </div>
+  </a>
+  
+  <a href="privacyPolicy.html"class="game-link container">	
+  <div class="game-tile">	
+    <img class="game-icon" src="privacypolicy.png" alt="Suggestions" loading="lazy">
+  <h1 class="game-title">Privacy Policy</h1> 	
+  </div>
+  </a>
+  
+  <a href="javascript:" onclick="randomGame(this);" class="game-link container">	
+  <div class="game-tile">	
+    <img class="game-icon" src="random.png" alt="Suggestions" loading="lazy">
+  <h1 class="game-title">Random Game</h1> 	
+  </div>
+  </a>
+  
+</div>
+  </section>
+   </div>  
+
+<div id='livechat' class='chat'>
+<h3>Live Chat</h3>
+<p>Chat with everyone on the site!</p>
+<div id='chat'></div>
+</div>
+
+<div class="whiteButton">
+<input class="whitebutton" type="button" onclick="location.href='zPass.html';" value=" . " />
+</div>
+
+    <div>
+<label for="searchQuery">Search Games:</label>
+    <input type="search" id="searchQuery" onload="startSearch()" onkeyup="startSearch()" title="Search" autocomplete='off'>
+  </div>
+
+  <section>
+  
+  <div id="games" class="flex-container"></div>
+
+  </section>
+
+   </div>
+   
+<img src='https://www.free-website-hit-counter.com/c.php?d=9&id=131905&s=10' border='0' alt='' width="0px">
+<img src="//www.clustrmaps.com/map_v2.png?d=N4d3fSjmXm-Tu2ycA8C1o5NqGTG8jdd1ZdiF5jTxqKY&cl=ffffff" border='0' alt='' width="0px">
+
+<script src='https://unpkg.com/intro.js/minified/intro.min.js'></script>
+<script src='jelly.js'></script>
 <script>
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-var rick = getRandomInt(1, 100)
+function choose(arr) {return arr[Math.floor(Math.random()*arr.length)];}
 
- if ((rick == 1)) {
-    window.location="zzz.html"; 
+function randomGame(replace) {
+var randomGame = choose(document.getElementsByClassName("games"));
+var getRandom = randomGame.cloneNode(true);
+replace.innerHTML = '';
+replace.replaceWith(getRandom);
+}
+
+function getRandomInt(min, max) {
+min = Math.ceil(min);
+max = Math.floor(max);
+return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function flipFlop() {
+(function(){['', '-ms-', '-webkit-', '-o-', '-moz-'].map(function(prefix){Array.prototype.slice.call(document.querySelectorAll('img')).map(function(el){el.style[prefix + 'transform'] = 'rotate(180deg)';});});}())
+}
+
+
+function tilt() {
+(function(){['', '-ms-', '-webkit-', '-o-', '-moz-'].map(function(prefix){Array.prototype.slice.call(document.querySelectorAll('h1,iframe,p,span,img,a')).map(function(el){el.style[prefix + 'transform'] = 'rotate('+ (function(){if (Math.random()>0.5){return '-'}return ''})() + (Math.floor(Math.random() * 25) - 1) + 'deg)';});});}())
+}
+
+function flyGames() {
+(function(){
+var R=0,x1=.1,y1=.05,x2=.25,y2=.24,x3=1.6,y3=.24,x4=300,y4=200,x5=300,y5=200,DI=document.getElementsByClassName("games"),DIL=DI.length;function A(){for(i=0;i-DIL;i++){DIS=DI[i].style;DIS.width='150px';DIS.position='fixed';DIS.left=(Math.sin(R*x1+i*x2+x3)*x4+x5)+"px";DIS.top=(Math.cos(R*y1+i*y2+y3)*y4+y5)+"px"}R++}setInterval(A,30);
+})();
+}
+
+function hehehe() {
+var rick = getRandomInt(1, 150);
+var jellyMaybe = getRandomInt(1, 100);
+var flipFlopMaybe = getRandomInt(1, 125);
+var tiltMaybe = getRandomInt(1, 175);
+var flyGamesMaybe = getRandomInt(1, 225);
+
+if ((rick == 1)) {
+window.location="zzz.html";
+}
+	
+if ((jellyMaybe == 1)) {
+jelly();
+}
+
+if ((flipFlopMaybe == 1)) {
+flipFlop();
+}
+
+if ((tiltMaybe == 1)) {
+tilt();
  }
  
- function hideDiv() {
- document.getElementById('awayMoneyScreen').style.display = "none";
-  var myobj = document.getElementById('awayMoneyScreen');
-  myobj.remove();
+ if ((flyGamesMaybe == 1)) {
+flyGames();
+ }
 }
 
-document.getElementById('awayMoneyScreen').style.display = "block";
-
-</script>
-</head>
-<body>
-
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>#countdown{text-align:center;font-size:3vw;margin-top:0;background-color:grey;}</style>
-</head>
-<body>
-
-<div id='awayMoneyScreen' class='overlay' style='display:none'>
-<button onclick='hideDiv()'>Ignore</button>
-<h1 style='font-size:4em; color:red;'>WARNING</h1>
-<h1>This site will be shut down on October 11, 2022</h1>
-<h3 style='font-size:3em; color:red;'>Play <a href='https://mountain658.glitch.me'>here</a> instead or <a href='https://mountain658.pages.dev'>here</a></h3>
-<h3 style='font-size:3em; color:red;'>Sorry <br> - mountain658</h3>
-</div>
-
-<script>
-if (r(window.location.hostname) == 'netlify.app') {
-showDestructionWarning();
+function suggestNew() {
+	if (localStorage.suggestionsNew) {
+localStorage.suggestionsNew = Number(localStorage.suggestionsNew)+1;
+} else {
+localStorage.suggestionsNew = 0;
 }
-function showDestructionWarning() {
-document.getElementById('awayMoneyScreen').style.display = "block";
-}
-
-function r(str) {
-  const indexOfSpace = str.indexOf('.');
-  if (indexOfSpace === -1) {
-    return '';
-  }
-  return str.substring(indexOfSpace + 1);
-}
-
-</script>
-
-<h1>Mountain Game Games</h1>
-
-<p>(To make it easier to find for next time drag the names up to the bookmarks bar.)</p>
-
-<div id="5new" style="background-color:#79ceea;text-align:center;  border-radius: 5px;">
-<h3>5 Newest Games</h3>
-
-<div id="5newHolder" style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr;"> 
-
-<div class="container">
-  <img src="fluidsimulator.png" alt="Fluid Simulator" style="width:100%">
-  <button class="btn"><a href="fluidsimulator.html">Fluid Simulator</a></button>
-  </div>
-  
-      <div class="container">
-  <img src="cellmachine.png" alt="Cell Machine" style="width:100%">
-  <button class="btn"><a href="cellmachine.html">Cell Machine</a></button>
-  </div>
-  
-          <div class="container">
-  <img src="catninja.png" alt="Cat Ninja" style="width:100%">
-  <button class="btn"><a href="catninja.html">Cat Ninja</a></button>
-  </div>
-  
-    <div class="container">
-  <img src="economical.png" alt="Economical 1 & 2" style="width:100%">
-  <button class="btn"><a href="economicalhome.html">Economical 1 & 2</a></button>
-  </div>
-  
-      <div class="container">
-  <img src="youtube.png" alt="Youtube" style="width:100%">
-  <button class="btn"><a href="Others">Youtube</a></button>
-  </div>
-  
-</div>
-</div>
-
-<div style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
- <div class="container">
-  <img src="other.png" alt="Others" style="width:100%">
-  <button class="btn"><a href="Others">Others</a></button>
-  </div>
-
-  <head><link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
-</head><script src='https://unpkg.com/intro.js/minified/intro.min.js'></script>
-
-      <div class="container" data-intro='Added new ways to make a  suggestion!'>
-        <img src="vector.gif" alt="Suggestions" style="width:100%">
-  <button class="btn"><a href="suggestions.html">Suggestions</a></button>
-  </div>
-          <div class="container">
-  <button class="btn"><a href="privacyPolicy.html">Privacy Policy</a></button>
-  </div>
-  
-  
-<script>
-if (localStorage.suggestionsNew) {
-    localStorage.suggestionsNew = Number(localStorage.suggestionsNew)+1;
-  } else {
-    localStorage.suggestionsNew = 0;
-  }
- if (Number(localStorage.suggestionsNew) >= 5) {}else{
+if (Number(localStorage.suggestionsNew) >= 5) {}else{
 introJs().start();
-  }
-</script>
- </div> 
-
- 
- <div id='livechat' style='  
-  background-color:skyblue;
-  font-size: 16px;
-  padding: 12px 24px;'>
- <h3>Live Chat</h3>
- <p>Chat with everyone on the site!</p>
- <div id='chat'></div>
- </div>
-<br><br>
-<div style='font-size:20px; float:left; position:absolute;'>
-<label for="searchbox">Search Games:</label>
-<input 
-  type="search" 
-  oninput="liveSearch()" 
-  id="searchbox" 
-  style='border-radius: 5px;font-size:20px;'
->
-</div>
-<br><br>
-<script src="search.js"></script>
- <script>
-
-function joinChat() {
-document.getElementById('chat').innerHTML = ("<iframe width='99%' height = '400px' src="
-+"'https://365968e3-9ab6-4323-9e6d-7c8a0e1fbb29.id.repl.co/'></iframe>");
+ }
 }
+
+	function joinChat() {
+document.getElementById('chat').innerHTML = ("<iframe width='99%' height = '400px' src="
++"'https://50db9992-8128-4ea6-b56c-ed425ab84e8e.id.repl.co/'></iframe>");
+}
+
+function startSite() {
 joinChat();
- </script>
+suggestNew();
+}
 
-<div class="container">
-  <img src="https://cdn.mos.cms.futurecdn.net/ntFmJUZ8tw3ULD3tkBaAtf-970-80.jpg.webp" alt="Mountain Game" style="width:100%">
-  <button class="btn"><a href="mountain.html">The Mountain Game</a></button>
-</div>
-<div class="container">
-    <img src="retrobowl.png" alt="Retro Bowl" style="width:100%">
-  <button class="btn"><a href="retro.html">Retro Bowl</a></button>
-</div>
-<div class="container">
-  <img src="slope.png" alt="Slope" style="width:100%">
-  <button class="btn"><a href="slope.html">Slope</a></button>
-</div>
-<div class="container">
-  <img src="tube-jumpers.png" alt="Tube Jumpers" style="width:100%">
-  <button class="btn"><a href="jumpers.html">Tube Jumpers</a></button>
-</div>
-<div class="container">
-  <img src="2048.png" alt="2048" style="width:100%">
-  <button class="btn"><a href="2048.html">2048</a></button>
-</div>
-<div class="container">
-  <img src="tetris.png" alt="Tetris" style="width:100%">
-  <button class="btn"><a href="tetris.html">Tetris</a></button>
-</div>
-  <div class="container">
-  <img src="tom-and-jerry.png" alt="Tom And Jerry" style="width:100%">
-  <button class="btn"><a href="tandj.html">Tom And Jerry</a></button>
-  </div>
+function displayGames() {
+for (let i = 0; i < g.length; i++) {
+var uniName = (g[i].n);
+uniName = uniName.toLowerCase();
+uniName = uniName.replace(/\s/g, '');
+var smallN = (g[i].sn || uniName);
+var img = (g[i].m || (smallN+'.png'));
+var desc = (g[i].d || '');
+function f() {if (g[i].f) {return (g[i].f+'/')} else {return ''}}
+function s() {if (g[i].h) {return (g[i].h)} else {return '.html'}}
+var subFolder = (f());
+var gC = document.createElement("a");
+gC.classList.add("game-link");
+gC.classList.add("container");
+gC.classList.add("games");
 
-    <div class="container">
-  <img src="geometry-dash.png" alt="Geometry Dash 1&2" style="width:100%">
-  <button class="btn"><a href="dash/dashHome.html">Geometry Dash 1&2</a></button>
-  </div>
+gC.innerHTML = '<div class="game-tile"><span style="font-size:0px;position:fixed">'+desc+'</span><div><img class="game-icon" src="'+img+'" loading="lazy" alt="'+g[i].n+'"></div><h1 class="game-title">'+g[i].n+'</h1></div>';
+gC.href = subFolder+smallN+s();
+if (i < g.length-5) {
+document.getElementById('games').appendChild(gC);
+ }else{
+document.getElementById('games').appendChild(gC);
+var gCNewest = gC.cloneNode(true);
+document.getElementById('5newHolder').appendChild(gCNewest);
+  }
+ }
+}
 
-      <div class="container">
-  <img src="duck-life.png" alt="Duck Life" style="width:100%">
-  <button class="btn"><a href="duckLife/duckLifeHome.html">Duck Life 1-4</a></button>
-  </div>
+var g = [
+{
+n : 'The Mountain Game',
+sn : 'mountain',
+m : 'mountainNoFade.png',
+d : 'idle clicker',
+ },
+{
+n : 'Retro Bowl',
+sn : 'retro',
+m : 'retrobowl.png',
+d : 'sports football',
+ },
+{
+n : 'Slope',
+sn : 'slope',
+ },
+{
+n : 'Tube Jumpers',
+sn : 'jumpers',
+m : 'tube-jumpers.png',
+ },
+{
+n : '2048',
+d : 'puzzle',
+ },
+{
+n : 'Tetris',
+d : 'puzzle',
+ },
+{
+n : 'Tom And Jerry',
+sn : 'tandj',
+m : 'tom-and-jerry.png',
+d : 'simple',
+ },
+{
+n : 'Geometry Dash 1 & 2',
+sn : 'dashHome',
+m : 'geometry-dash.png',
+d : 'jumping run',
+f : 'dash'
+ },
+{
+n : 'Duck Life 1-4',
+sn : 'duckLifeHome',
+m : 'duck-life.png',
+d : 'run pet',
+f : 'duckLife'
+ },
+{
+n : 'Flood Runner',
+sn : 'floodRunner',
+m : 'flood-runner.png',
+ },
+{
+n : 'Electro Man',
+sn : 'ElectroMan',
+m : 'electric-man.png',
+ },
+{
+n : 'World\'s Hardest Game',
+sn : 'WorldsHardestGame',
+m : 'worlds-hardest-game.png',
+ },
+{
+n : '1 on 1 Soccer',
+sn : '1v1Soccer',
+m : '1-on-1-soccer.png',
+d : 'sports',
+ },
+{
+n : 'Chess',
+d : 'board',
+ },
+{
+n : 'Snake',
+d : 'google',
+ },
+{
+n : 'Cookie Clicker',
+sn : 'cookie',
+ },
+{
+n : 'T-rex Game',
+sn : 't-rex-game',
+h : '/',
+m : 't-rex.jpeg'
+ },
+{
+n : 'Madalin Stunt Cars 2',
+sn : 'StuntCars',
+m : 'madalin-stunt-cars-2.jpeg',
+d : 'cars'
+ },
+{
+n : '10 More Bullets',
+sn : '10moreBullets',
+m : '10.png',
+ },
+{
+n : 'Burrito Bison',
+sn : 'BurritoBison',
+m : 'burrito.png',
+ },
+{
+n : 'Moto-X3M 1 & 4',
+sn : 'motox3mhome',
+m : 'moto-x3m.png',
+ },
+{
+n : 'Tunnel Rush',
+sn : 'Tunnel-Rush',
+m : 'tunnelrush.png',
+ },
+{
+n : 'Google Baseball',
+sn : 'Google-Baseball',
+m : 'google-baseball.png',
+ },
+{
+n : 'Drift Hunters',
+sn : 'Drift-Hunters',
+m : 'drift-hunters.png',
+ },
+{
+n : 'Fireboy And Watergirl',
+sn : 'Fire-Boy-Water-Girl',
+h : '/',
+m : 'firewater.png',
+ },
+{
+n : 'Big Tower Tiny Square',
+sn : 'BigTowerTinySquare',
+m : 'TinySquare.png',
+ },
+{
+n : 'Basketball Stars',
+sn : 'Basket-Ball-Stars',
+m : 'basketballstars.png',
+ },
+{
+n : 'Deepest Sword',
+ },
+ {
+n : 'Stickman Climb 1&2',
+sn : 'stickmanclimbmain',
+m : 'stickmanclimb.png',
+ },
+ {
+n : 'Just Flip',
+ },
+  {
+n : 'Idle Miner',
+ },
+  {
+n : 'Launchball',
+ },
+  {
+n : 'Paper.io 2',
+sn : 'paperio2',
+ },
+   {
+n : 'Air Hockey',
+ },
+{
+n : 'Wordle',
+ },
+ {
+n : 'Pacman',
+ },
+  {
+n : 'The Oregon Trail',
+sn : 'theoregontrial',
+ },
+  {
+n : 'Mountain Maze',
+ },
+  {
+n : 'Stack',
+ },
+  {
+n : 'Rolling Forests',
+sn : 'forests',
+ },
+  {
+n : 'Run 3',
+ },
+  {
+n : 'Snowball Fight',
+ },
+  {
+n : 'Raft Wars 1 & 2',
+sn : 'raftwarshome',
+m : 'raftwars.png',
+ },
+   {
+n : 'Game Inside A Game',
+ },
+   {
+n : 'There Is No Game',
+ },
+  {
+n : 'Economical 1 & 2',
+sn : 'economicalhome',
+m : 'economical.png',
+ },
+   {
+n : 'Cell Machine',
+ },
+   {
+n : 'Cat Ninja',
+ },
+   {
+   /*/Typo is on purpose /*/
+n : 'Celseste',
+sn : 'celeste',
+ },
+   {
+n : 'Subway Surfers',
+ },
+   {
+n : 'Edge Not Found',
+ },
+   {
+n : 'Cubefield',
+ },
+   {
+n : 'Radius Raid',
+ },
+   {
+n : 'Papery Planes',
+ },
+   {
+n : 'Swerve',
+ },
+   {
+n : 'A Dance Of Fire And Ice',
+ },
+   {
+n : 'Grey Box Testing',
+ },
+   {
+n : 'Tanuki Sunset',
+ },
+   {
+n : 'Ninja VS Evilcorp',
+ },
+   {
+n : 'Evil Glitch',
+ },
+   {
+n : 'Basket Random',
+ },
+   {
+n : 'Stumble Guys',
+ },
+   {
+n : 'Johnny Upgrade',
+ },
+   {
+n : 'Crossy Road',
+ },
+   {
+n : 'Circle O',
+ },
+];
 
-      <div class="container">
-  <img src="flood-runner.png" alt="Flood Runner" style="width:100%">
-  <button class="btn"><a href="floodRunner.html">Flood Runner</a></button>
-  </div>
-
-      <div class="container">
-  <img src="electric-man.png" alt="Electro Man" style="width:100%">
-  <button class="btn"><a href="ElectroMan.html">Electro Man</a></button>
-  </div>
-  
-        <div class="container">
-  <img src="worlds-hardest-game.png" alt="World's Hardest Game" style="width:100%">
-  <button class="btn"><a href="WorldsHardestGame.html">World's Hardest Game</a></button>
-  </div>
-
-        <div class="container">
-  <img src="1-on-1-soccer.png" alt="1 on 1 Soccer" style="width:100%">
-  <button class="btn"><a href="1v1Soccer.html">1 on 1 Soccer</a></button>
-  </div>
-
-        <div class="container">
-  <img src="chess.png" alt="Chess" style="width:100%">
-  <button class="btn"><a href="chess.html">Chess</a></button>
-  </div>
-
-          <div class="container">
-  <img src="snake.png" alt="Snake" style="width:100%">
-  <button class="btn"><a href="snake.html">Snake</a></button>
-  </div>
-
-            <div class="container">
-  <img src="cookie.png" alt="Cookie Clicker" style="width:100%">
-  <button class="btn"><a href="cookie.html">Cookie Clicker</a></button>
-  </div>
-
-              <div class="container">
-  <img src="t-rex.jpeg" alt="T-rex Game" style="width:100%">
-  <button class="btn"><a href="t-rex-game">T-rex Game</a></button>
-  </div>
-
-              <div class="container">
-  <img src="madalin-stunt-cars-2.jpeg" alt="Madalin Stunt Cars 2" style="width:100%">
-  <button class="btn"><a href="StuntCars.html">Madalin Stunt Cars 2</a></button>
-  </div>
-
-                <div class="container">
-  <img src="10.png" alt="10 More Bullets" style="width:100%">
-  <button class="btn"><a href="10moreBullets.html">10 More Bullets</a></button>
-  </div>
-
-                <div class="container">
-  <img src="burrito.png" alt="Burrito Bison" style="width:100%">
-  <button class="btn"><a href="BurritoBison.html">Burrito Bison</a></button>
-  </div>
-
-                  <div class="container">
-  <img src="moto-x3m.png" alt="Moto-X3M 1 & 4" style="width:100%">
-  <button class="btn"><a href="motox3mhome.html
-">Moto X3M 1-3</a></button>
-  </div>
-
-                    <div class="container">
-  <img src="tunnelrush.png" alt="Tunnel Rush" style="width:100%">
-  <button class="btn"><a href="Tunnel-Rush.html">Tunnel Rush</a></button>
-  </div>
-
-                      <div class="container">
-  <img src="google-baseball.png" alt="Google Baseball" style="width:100%">
-  <button class="btn"><a href="Google-Baseball.html">Google Baseball</a></button>
-  </div>
-
-                      <div class="container">
-  <img src="drift-hunters.png" alt="Drift Hunters" style="width:100%">
-  <button class="btn"><a href="Drift-Hunters.html">Drift Hunters</a></button>
-  </div>
-
-                        <div class="container">
-  <img src="firewater.png" alt="Fireboy And Watergirl" style="width:100%">
-  <button class="btn"><a href="Fire-Boy-Water-Girl">Fireboy And Watergirl</a></button>
-  </div>
-
-                          <div class="container">
-  <img src="TinySquare.png" alt="Big Tower Tiny Square" style="width:100%">
-  <button class="btn"><a href="BigTowerTinySquare.html">Big Tower Tiny Square</a></button>
-  </div>
-
-                            <div class="container">
-  <img src="basketballstars.png" alt="Basketball Stars" style="width:100%">
-  <button class="btn"><a href="Basket-Ball-Stars.html">Basketball Stars</a></button>
-  </div>
-  
-                              <div class="container">
-  <img src="deepestsword.png" alt="Deepest Sword" style="width:100%">
-  <button class="btn"><a href="deepestsword.html">Deepest Sword</a></button>
-  </div>
-  
-   <div class="container">
-  <img src="stickmanclimb.png" alt="Stickman Climb 1&2" style="width:100%">
-  <button class="btn"><a href="stickmanclimbmain.html">Stickman Climb 1&2</a></button>
-  </div>
-  
-   <div class="container">
-  <img src="justflip.png" alt="Just Flip" style="width:100%">
-  <button class="btn"><a href="justflip.html">Just Flip</a></button>
-  </div>
-  
-     <div class="container">
-  <img src="idleminer.png" alt="Idle Miner" style="width:100%">
-  <button class="btn"><a href="idleminer.html">Idle Miner</a></button>
-  </div>
-  
-       <div class="container">
-  <img src="launchball.png" alt="Launchball" style="width:100%">
-  <button class="btn"><a href="launchball.html">Launchball</a></button>
-  </div>
-  
-         <div class="container">
-  <img src="paperio2.png" alt="Paper.io 2" style="width:100%">
-  <button class="btn"><a href="paperio2.html">Paper.io 2</a></button>
-  </div>
-  
-           <div class="container">
-  <img src="lastwood.png" alt="Last Wood" style="width:100%">
-  <button class="btn"><a href="lastwood.html">Last Wood</a></button>
-  </div>
-  
-             <div class="container">
-  <img src="airhockey.png" alt="Air Hockey" style="width:100%">
-  <button class="btn"><a href="airhockey.html">Air Hockey</a></button>
-  </div>
-  
-               <div class="container">
-  <img src="wordle.png" alt="Wordle" style="width:100%">
-  <button class="btn"><a href="wordle.html">Wordle</a></button>
-  </div>
-  
-                 <div class="container">
-  <img src="pacman.png" alt="Pacman" style="width:100%">
-  <button class="btn"><a href="pacman.html">Pacman</a></button>
-  </div>
-
- <div class="container">
-  <img src="theoregontrial.png" alt="The Oregon Trail" style="width:100%">
-  <button class="btn"><a href="theoregontrial.html">The Oregon Trail</a></button>
-  </div>
-  
-  <div class="container">
-  <img src="mountainmaze.png" alt="Mountain Maze" style="width:100%">
-  <button class="btn"><a href="mountainmaze.html">Mountain Maze</a></button>
-  </div>
-  
-    <div class="container">
-  <img src="stack.png" alt="Stack" style="width:100%">
-  <button class="btn"><a href="stack.html">Stack</a></button>
-  </div>
-  
-      <div class="container">
-  <img src="forests.png" alt="Rolling Forests" style="width:100%">
-  <button class="btn"><a href="forests.html">Rolling Forests</a></button>
-  </div>
-  
-        <div class="container">
-  <img src="useboxmen.png" alt="Use Boxmen" style="width:100%">
-  <button class="btn"><a href="useboxmen.html">Use Boxmen</a></button>
-  </div>
-  
-          <div class="container">
-  <img src="bloxorz.png" alt="Bloxorz" style="width:100%">
-  <button class="btn"><a href="bloxorz.html">Bloxorz</a></button>
-  </div>
-  
-  <div class="container">
-  <img src="run3.png" alt="Run 3" style="width:100%">
-  <button class="btn"><a href="run3.html">Run 3</a></button>
-  </div>
-  
-    <div class="container">
-  <img src="snowballfight.png" alt="Snowball Fight" style="width:100%">
-  <button class="btn"><a href="snowballfight.html">Snowball Fight</a></button>
-  </div>
-  
-      <div class="container">
-  <img src="raftwars.png" alt="Raft Wars 1 & 2" style="width:100%">
-  <button class="btn"><a href="raftwarshome.html">Raft Wars 1 & 2</a></button>
-  </div>
-  
-<div class="container">
-  <img src="gameinsideagame.png" alt="Game Inside A Game" style="width:100%">
-  <button class="btn"><a href="gameinsideagame.html">Game Inside A Game</a></button>
-  </div>
-  
-    <div class="container">
-  <img src="thereisnogame.png" alt="There Is No Game" style="width:100%">
-  <button class="btn"><a href="thereisnogame.html">There Is No Game</a></button>
-  </div>
-  
-      <div class="container">
-  <img src="economical.png" alt="Economical 1 & 2" style="width:100%">
-  <button class="btn"><a href="economicalhome.html">Economical 1 & 2</a></button>
-  </div>
-  
-        <div class="container">
-  <img src="cellmachine.png" alt="Cell Machine" style="width:100%">
-  <button class="btn"><a href="cellmachine.html">Cell Machine</a></button>
-  </div>
-  
-          <div class="container">
-  <img src="catninja.png" alt="Cat Ninja" style="width:100%">
-  <button class="btn"><a href="catninja.html">Cat Ninja</a></button>
-  </div>
-  
-    <div class="whiteButton"> 
-  <input class="whitebutton" type="button" onclick="location.href='zPass.html';" value="  .  " />
-  </div>
-
-<img src='https://www.free-website-hit-counter.com/c.php?d=9&id=131905&s=10' border='0' alt='' width="0px">
-  <img src="//www.clustrmaps.com/map_v2.png?d=N4d3fSjmXm-Tu2ycA8C1o5NqGTG8jdd1ZdiF5jTxqKY&cl=ffffff" border='0' alt='' width="0px">
-
-  <script src="load.js"> </script>
+displayGames();
+startSite();
+hehehe();
+</script>
 </body>
 </html>

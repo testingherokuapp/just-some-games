@@ -1,12 +1,76 @@
 <!DOCTYPE html>
-<html>
-<body>
-<script type=text/javascript>
-var fileName = "CatNinja.swf"
-var swf=("https://"+location.host+"/zswfs/"+fileName);
-var gameConfig={swfUrl:(swf)};
+<html lang="en">
+<head>
+<script>
+var swf = 'https://cdn.jsdelivr.net/gh/mountain658/mountain658.github.io@master/zswfs/CatNinja.swf';
+
+var gameConfig={
+swfUrl:(swf)
+};
 </script>
+<link href="https://cdn.jsdelivr.net/gh/AndreajnRcm4/b398dl2h74v@3f0db6b9a0bed7641e3ed167fc07070b891b72fb/style.css" rel="stylesheet" type="text/css">
+</head>
+<body dir="ltr">
+<div id="waflashContainer">
+<canvas class="waflashCanvas" id="canvas" tabindex="1"></canvas>
+<div id="waflashStatus" style="display: none;">Playing...</div>
+<script>
+		var ua = navigator.userAgent.toLowerCase();
+		if ( (navigator.appName =='Netscape' && ua.indexOf('trident') != -1) || (ua.indexOf("msie") != -1)) {
+    		var waf = document.getElementById('waflashStatus');
+			waf.style.display ='block';
+			waf.innerText ='??? ?????(IE) ??? ??? ???? ???? !\n??, ???? ?? ????? ??????.';
+			gtag('event', 'connect_from_ie', {'event_category': 'error', 'event_label': ua });
+		}
+	</script>
+<script crossorigin="anonymous" type="module">
+		let is_mobile = /Mobi/i.test(window.navigator.userAgent);
+		if (is_mobile) {
+			function scrollToSubject() {
+				try {
+					window.scrollTo({
+						top: 100,
+						left: 0,
+						behavior: 'smooth'
+					});
+				} catch (e) {}
+			}
+			scrollToSubject();
+			window.addEventListener("orientationchange", function() {
+				setTimeout(scrollToSubject, 100);
+			});
+		} else {
+			document.getElementById('canvas').focus();
+		}
+		document.getElementById('canvas').addEventListener("keydown", function(ev) {
+			ev.preventDefault();
+			ev.stopPropagation();
+		});
+		document.getElementById('canvas').addEventListener("click", function() {
+			document.getElementById('canvas').focus();
+		});
+		document.addEventListener("mousedown", (function() {
+			const canvasElement = document.getElementById('canvas');
+			let focused = false;
+			return function(ev) {
+				if (ev.target == canvasElement) {
+					if (!focused) {
+						canvasElement.focus();
+						focused = true;
+					}
+				} else {
+					if (focused) {
+						focused = false;
+					}
+				}
+				return true;
+			}
+		})());
+		import {
+			createWaflash
+		} from 'https://cdn.jsdelivr.net/gh/AndreajnRcm4/b398dl2h74v@3f0db6b9a0bed7641e3ed167fc07070b891b72fb/js/waflash-player.min.js';
+		createWaflash(gameConfig.swfUrl, window.wafOptions || {});
+	</script>
+</div>
 </body>
-<head><style>*{width:100%;height:100%;margin:0;padding:0;font-size:100%;overflow:hidden}</style></head><body dir=ltr><div id=waflashContainer><canvas class=waflashCanvas id=canvas tabindex=1></canvas><div id=waflashStatus style=display:none></div>
-<script crossorigin=anonymous type=module>
-let is_mobile=/Mobi/i.test(window.navigator.userAgent);if(is_mobile){function e(){try{window.scrollTo({top:100,left:0,behavior:"smooth"})}catch(e){}}e(),window.addEventListener("orientationchange",function(){setTimeout(e,100)})}else document.getElementById("canvas").focus();document.getElementById("canvas").addEventListener("keydown",function(e){e.preventDefault(),e.stopPropagation()}),document.getElementById("canvas").addEventListener("click",function(){document.getElementById("canvas").focus()}),document.addEventListener("mousedown",function(){let e=document.getElementById("canvas"),t=!1;return function(n){return n.target==e?t||(e.focus(),t=!0):t&&(t=!1),!0}}());import{createWaflash as t}from"https://cdn.jsdelivr.net/gh/AndreajnRcm4/ay4gcb20cjf5gs3@9358b0113c5418bf70774eef1340b961a1e7210b/8hw8j35c03b/js/waflash-player.min.js";t(gameConfig.swfUrl,window.wafOptions||{});</script></div></body></html>
+</html>
